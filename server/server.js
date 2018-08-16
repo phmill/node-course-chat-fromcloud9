@@ -13,12 +13,23 @@ var io = socketIO(server);
 
 app.use(express.static(publicPath));
 
-io.on('connection', function (socket) {
-   console.log('New user conected');
+io.on('connection', (socket) => {
+    console.log('New user conected');
    
-   socket.on('disconnect', () => {
-            console.log('User disconnected');
-        });
+    socket.emit('newMessage', {
+        from: 'johnny doe',
+        text: 'hey you, fucking motherfucker',
+        createdAt: 456
+    });
+    
+   
+    socket.on('createMessage', (newMessage) => {
+        console.log('createMessage', newMessage);
+    });
+   
+    socket.on('disconnect', () => {
+        console.log('User disconnected');
+    });
 });
 
 server.listen(port, () => {
