@@ -2,11 +2,6 @@ var socket = io();
         
 socket.on('connect', function () {
     console.log('Connected to server');
-   
-    socket.emit('createMessage', {
-        from: 'henryTheFucker',
-        text: 'season of the bitch level 2.'
-    });
 });
 
 socket.on('disconnect', function() {
